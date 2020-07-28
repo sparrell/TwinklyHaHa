@@ -11,7 +11,8 @@ defmodule TwinklyhahaWeb.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    #plug :accepts, ["json"]
+    plug :accepts, ["application/openc2-cmd+json;version=1.0"]
   end
 
   scope "/", TwinklyhahaWeb do
@@ -26,6 +27,11 @@ defmodule TwinklyhahaWeb.Router do
   # scope "/api", TwinklyhahaWeb do
   #   pipe_through :api
   # end
+
+  scope "/openc2", TwinklyhahaWeb do
+    pipe_through :api
+    post "/", OC2Controller, :command
+  end
 
   # Enables LiveDashboard only for development
   #
