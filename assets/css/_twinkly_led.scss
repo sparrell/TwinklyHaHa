@@ -1,0 +1,22 @@
+.led-on {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ABFF00;
+  transition: all 250ms ease;
+
+}
+
+.led-off {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.led-box {
+  float: left;
+  margin: 9px;
+}
