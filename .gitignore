@@ -1,6 +1,9 @@
 *.beam
 /config/*.secret.exs
 .elixir_ls/
+twinklyhaha-*.tar
+npm-debug.log
+/assets/node_modules/
 
 # The directory Mix will write compiled artifacts to.
 /_build/
@@ -35,4 +38,5 @@ npm-debug.log
 # Since we are building assets from assets/,
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
+
 /priv/static/
