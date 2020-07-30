@@ -11,19 +11,16 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><b>PoC/Plugfest/Hackathon </b></li>
-          </ul>
-        </nav>
+      <div style="text-align:center">
         <a href="/" class="logo">
           <img src="<%= Routes.static_path(@conn, "/images/openc2-logo.png") %>" alt="OpenC2 logo"/>
-        </a> 
+        </a>
+        <p>
         <a href="/" class="logo">
           <img src="<%= Routes.static_path(@conn, "/images/sbomLogo.png") %>" alt="SBOM logo"/>
         </a>
-      </section>
+        <H1>PoC/Plugfest/Hackathon</H1>
+      </div>
     </header>
     <%= @inner_content %>
   </body>
