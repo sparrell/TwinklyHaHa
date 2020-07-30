@@ -2,6 +2,13 @@ defmodule TwinklyhahaWeb.OC2Controller do
   require Logger
   use TwinklyhahaWeb, :controller
 
+  @topic "leds"
+  @on "on"
+  @off "off"
+  @red "red"
+  @colors ["Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red"]
+
+
   def command(conn, params) do
     Logger.debug "oc2_controller command #{inspect params}"
     ## check top level components of command json
@@ -162,32 +169,34 @@ defmodule TwinklyhahaWeb.OC2Controller do
     Logger.debug "do_action_set_led on"
     set_led_on(conn)
   end
-
   defp do_action_set_led(conn,attr) when attr == "off" do
     Logger.debug "do_action_set_led off"
     set_led_off(conn)
   end
+  defp do_action_set_led(conn,attr) when (
+      (attr == "rainbow") or
+      (attr == "red") or
+      (attr == "orange") or
+      (attr == "yellow") or
+      (attr == "green") or
+      (attr == "blue") or
+      (attr == "indigo") or
+      (attr == "violet")
+      ) do
+        #"Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red"]
 
+    Logger.debug "do_action_set_led #{attr}"
+    set_matrix_color(attr,conn)
+  end
   defp do_action_set_led(conn,attr) do
     Logger.debug "do_action_set_led attr= #{attr} not recognized"
-    send_resp(conn, :unprocessable_entity, "led state should be on or off")
+    send_resp(conn, :unprocessable_entity, "led state not recognized")
   end
 
   defp do_action_set_led_pattern(conn,attr) when attr == "rainbow" do
     Logger.debug "do_action_set_led_pattern rainbow"
     set_matrix_rainbow(conn)
   end
-
-  defp do_action_set_led_pattern(conn,attr) when attr == "red" do
-    Logger.debug "do_action_set_led_pattern red"
-    set_matrix_red(conn)
-  end
-
-  defp do_action_set_led_pattern(conn,attr) when attr == "purple" do
-    Logger.debug "do_action_set_led_pattern purple"
-    set_matrix_purple(conn)
-  end
-
 
   defp check_one_map_key(in_map) do
     ## check it is a map and has one key.
@@ -267,7 +276,7 @@ defmodule TwinklyhahaWeb.OC2Controller do
     ## build results sbom_results
     results = %{sbom: sbom_results}
     ## build response from status and results
-    return_map = %{status: 200,
+    return_map = %{status: "ok",
                   results: results}
     return_map
   end
@@ -333,14 +342,14 @@ defmodule TwinklyhahaWeb.OC2Controller do
   end
 
   defp set_led_on(conn) do
-    Logger.debug("set_led_on - just returning ok for now")
-    Firmware.Worker.red()
+    Logger.debug("oc2_c:set_led_on")
+    Phoenix.PubSub.broadcast(Twinklyhaha.PubSub, @topic, @on)
     json(conn, %{status: :ok})
   end
 
   defp set_led_off(conn) do
-    Logger.debug("set_led_off - just returning ok for now")
-    Firmware.Worker.rainbow()
+    Logger.debug("oc2:set_led_off")
+    Phoenix.PubSub.broadcast(Twinklyhaha.PubSub, @topic, @off)
     json(conn, %{status: :ok})
   end
 
@@ -350,15 +359,16 @@ defmodule TwinklyhahaWeb.OC2Controller do
   end
 
   defp set_matrix_red(conn) do
-    Firmware.Worker.red()
+    Logger.debug("oc2_c:set_matrix_red")
+    Phoenix.PubSub.broadcast(Twinklyhaha.PubSub, @topic, @red)
     json(conn, %{status: :ok})
   end
 
-  defp set_matrix_purple(conn) do
-    Firmware.Worker.purple()
+  defp set_matrix_color(color,conn) do
+    Logger.debug("oc2_c:set_matrix_color #{color}")
+    Phoenix.PubSub.broadcast(Twinklyhaha.PubSub, @topic, color)
     json(conn, %{status: :ok})
   end
-
 
 
 end
