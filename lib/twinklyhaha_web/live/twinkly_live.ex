@@ -86,29 +86,32 @@ defmodule TwinklyhahaWeb.TwinklyLive do
     Process.send_after(self(), :shift_color, 100)
     {:noreply, shift_colors(socket)}
   end
+
   def handle_info("on", socket) do
     Logger.debug("tlive:hand.info - on")
     {:noreply, current_color(socket, hd(@colors), true)}
   end
+
   def handle_info("off", socket) do
     Logger.debug("tlive:hand.info- off")
     {:noreply, assign(socket, :current_color, "rgba(0, 0, 0, 0.2)")}
   end
-  def handle_info(color, socket) when (
-      (color == "rainbow") or
-      (color == "red") or
-      (color == "orange") or
-      (color == "yellow") or
-      (color == "green") or
-      (color == "blue") or
-      (color == "indigo") or
-      (color == "violet")
-      ) do
+
+  def handle_info(color, socket)
+      when color == "rainbow" or
+             color == "red" or
+             color == "orange" or
+             color == "yellow" or
+             color == "green" or
+             color == "blue" or
+             color == "indigo" or
+             color == "violet" do
     Logger.debug("tlive:hand.info - #{color}")
     {:noreply, current_color(socket, color, true)}
   end
+
   def handle_info(what_wrong, socket) do
-    Logger.debug("tlive:hand.info- wrong - #{inspect what_wrong}")
+    Logger.debug("tlive:hand.info- wrong - #{inspect(what_wrong)}")
     {:noreply, assign(socket, :current_color, "rgba(0, 0, 0, 0.2)")}
   end
 

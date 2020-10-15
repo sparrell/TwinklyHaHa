@@ -11,7 +11,7 @@ defmodule TwinklyhahaWeb.Router do
   end
 
   pipeline :api do
-    #plug :accepts, ["json"]
+    # plug :accepts, ["json"]
     plug :accepts, ["application/openc2-cmd+json;version=1.0"]
   end
 
