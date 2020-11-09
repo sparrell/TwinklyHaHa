@@ -74,7 +74,7 @@ release: ## Build a release of the application with MIX_ENV=prod
 
 .PHONY: docker-image
 docker-image:
-	docker build . -t haha:$(APP_VERSION) --no-cache
+	docker build . -t haha:$(APP_VERSION)
 
 .PHONY: push-image-gcp push-and-serve deploy-existing-image
 push-image-gcp: ## push image to gcp
@@ -82,7 +82,7 @@ push-image-gcp: ## push image to gcp
   @echo "Removing previous image $(APP_VERSION) from your machine..."; \
 	docker rmi gcr.io/twinklymaha/haha:$(APP_VERSION);\
 	fi
-	docker build . -t gcr.io/twinklymaha/haha:$(APP_VERSION) --no-cache
+	docker build . -t gcr.io/twinklymaha/haha:$(APP_VERSION)
 
 	gcloud container images delete gcr.io/twinklymaha/haha:$(APP_VERSION) --force-delete-tags  || echo "no image to delete on the remote"
 	docker push gcr.io/twinklymaha/haha:$(APP_VERSION)
