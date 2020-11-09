@@ -29,22 +29,30 @@ To start your Phoenix server:
   * Install Node.js dependencies with `npm install` inside the `assets` directory
   * Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser -
-which gives you the Phoenix home page.
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser which gives you the Phoenix home page.
 
-Visit [`localhost:4000/twinkly`](http://localhost:4000/twinkly) to get web blinking lights, under web button control.
+### sending openc2 commands
+1. Visit [`localhost:4000/twinkly`](http://localhost:4000/twinkly) to get web blinking lights, under web button control.
+2. Send commands via OpenC2 API at [`localhost:4000/openc2`](http://localhost:4000/openc2) and watch the commands change the lights
 
-Watch this page while sending commands via OpenC2 API at [`localhost:4000/openc2`](http://localhost:4000/openc2) and watch the commands change the lights.
+An example of the openc2 command which will turn the LEDs on your browser to green:
+```json
+{
+    "action": "set",
+    "target": {
+        "x-sfractal-blinky:led": "green"
+    },
+    "args": {
+        "response_requested": "complete"
+    }
+}
+```
+
+Below on the left is the browser showing the LEDs turned green, on the right is an application that sends the openc2 command to the endpoint http://localhost:4000/openc2
+
+![screenshot openc2 command](https://user-images.githubusercontent.com/584211/98516544-b5b92c00-227d-11eb-9406-ce540cb3614f.png)
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
 
 
 ## Convenience make tasks
