@@ -73,23 +73,23 @@ release: ## Build a release of the application with MIX_ENV=prod
 	MIX_ENV=prod mix release
 
 .PHONY: docker-image
-docker-image:
-	docker build . -t haha:$(APP_VERSION) --no-cache
+docker-image: ## builds a docker image
+	docker build . -t haha:$(APP_VERSION)
 
 .PHONY: push-image-gcp push-and-serve deploy-existing-image
-push-image-gcp: ## push image to gcp
+push-image-gcp: ## create docker image and push image to gcp
 	@if [[ "$(docker images -q gcr.io/twinklymaha/haha:$(APP_VERSION)> /dev/null)" != "" ]]; then \
   @echo "Removing previous image $(APP_VERSION) from your machine..."; \
 	docker rmi gcr.io/twinklymaha/haha:$(APP_VERSION);\
 	fi
-	docker build . -t gcr.io/twinklymaha/haha:$(APP_VERSION) --no-cache
+	docker build . -t gcr.io/twinklymaha/haha:$(APP_VERSION)
 
 	gcloud container images delete gcr.io/twinklymaha/haha:$(APP_VERSION) --force-delete-tags  || echo "no image to delete on the remote"
 	docker push gcr.io/twinklymaha/haha:$(APP_VERSION)
 
-push-and-serve-gcp: push-image-gcp deploy-existing-image
+push-and-serve-gcp: push-image-gcp deploy-existing-image ## creates docker image then push to gcp and launches an instance with the image
 
-deploy-existing-image:
+deploy-existing-image: ## creates an instance using existing gcp docker image
 	gcloud compute instances create-with-container $(instance-name) \
 		--container-image=gcr.io/twinklymaha/haha:$(DOCKER_IMAGE_TAG) \
 		--machine-type=e2-micro \
@@ -99,6 +99,6 @@ deploy-existing-image:
 		--tags=http-server,https-server \
 		--labels=project=haha
 
-.PHONY: update-instance
-update-instance:
+.PHONY: update-instance 
+update-instance: ## updates image of a running instance
 	gcloud compute instances update-container $(instance-name) --container-image gcr.io/twinklymaha/haha:$(image-tag)
