@@ -10,7 +10,7 @@ defmodule TwinklyhahaWeb.TwinklyLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    ## subscribe to pubsub topic.
+    ## subscribe to pubsub topic
     TwinklyhahaWeb.Endpoint.subscribe(@topic)
     {:ok, assign(socket, led_on?: false, current_color: hd(@colors), colors: @colors)}
   end
@@ -119,11 +119,11 @@ defmodule TwinklyhahaWeb.TwinklyLive do
     assign(socket, :current_color, "rainbow")
   end
 
-  defp current_color(socket, _color, false = _led_on?) do
+  defp current_color(socket, _color, _led_on? = false) do
     assign(socket, :current_color, "rgba(0, 0, 0, 0.2)")
   end
 
-  defp current_color(socket, color, true = _led_on?) do
+  defp current_color(socket, color, _led_on? = true) do
     assign(socket, :current_color, color)
   end
 

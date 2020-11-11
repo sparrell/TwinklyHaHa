@@ -8,7 +8,7 @@ defmodule TwinklyhahaWeb.OC2Controller do
 
   def command(conn, params) do
     Logger.debug("oc2_controller command #{inspect(params)}")
-    ## check top level components of command json.
+    ## check top level components of command json
     tops = Map.keys(params)
 
     cond do
@@ -279,7 +279,7 @@ defmodule TwinklyhahaWeb.OC2Controller do
     {:error, "sbom format error"}
   end
 
-  defp cyclonedx() do
+  defp cyclonedx do
     ## return sbom in cyclonedx format
     ## build result starting innermost at binary
     cyclonedx_bin =
