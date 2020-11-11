@@ -10,7 +10,7 @@ defmodule TwinklyhahaWeb.TwinklyLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    ## subscribe to pubsub topic
+    ## subscribe to pubsub topic.
     TwinklyhahaWeb.Endpoint.subscribe(@topic)
     {:ok, assign(socket, led_on?: false, current_color: hd(@colors), colors: @colors)}
   end
