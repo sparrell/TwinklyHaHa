@@ -6,7 +6,7 @@ defmodule TwinklyhahaWeb.OC2Controller do
   @on "on"
   @off "off"
   @red "red"
-  @colors ["Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red"]
+  # @colors ["Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red"]
 
   def command(conn, params) do
     Logger.debug("oc2_controller command #{inspect(params)}")
@@ -390,11 +390,11 @@ defmodule TwinklyhahaWeb.OC2Controller do
     json(conn, %{status: :ok})
   end
 
-  defp set_matrix_red(conn) do
-    Logger.debug("oc2_c:set_matrix_red")
-    Phoenix.PubSub.broadcast(Twinklyhaha.PubSub, @topic, @red)
-    json(conn, %{status: :ok})
-  end
+  # defp set_matrix_red(conn) do
+  #   Logger.debug("oc2_c:set_matrix_red")
+  #   Phoenix.PubSub.broadcast(Twinklyhaha.PubSub, @topic, @red)
+  #   json(conn, %{status: :ok})
+  # end
 
   defp set_matrix_color(color, conn) do
     Logger.debug("oc2_c:set_matrix_color #{color}")
