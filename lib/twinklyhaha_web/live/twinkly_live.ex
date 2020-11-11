@@ -98,14 +98,8 @@ defmodule TwinklyhahaWeb.TwinklyLive do
   end
 
   def handle_info(color, socket)
-      when color == "rainbow" or
-             color == "red" or
-             color == "orange" or
-             color == "yellow" or
-             color == "green" or
-             color == "blue" or
-             color == "indigo" or
-             color == "violet" do
+      when color == "rainbow" or color == "red" or color == "orange" or color == "yellow" or
+             color == "green" or color == "blue" or color == "indigo" or color == "violet" do
     Logger.debug("tlive:hand.info - #{color}")
     {:noreply, current_color(socket, color, true)}
   end

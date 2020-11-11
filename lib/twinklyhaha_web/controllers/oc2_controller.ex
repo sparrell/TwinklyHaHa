@@ -192,14 +192,8 @@ defmodule TwinklyhahaWeb.OC2Controller do
   end
 
   defp do_action_set_led(conn, attr)
-       when attr == "rainbow" or
-              attr == "red" or
-              attr == "orange" or
-              attr == "yellow" or
-              attr == "green" or
-              attr == "blue" or
-              attr == "indigo" or
-              attr == "violet" do
+       when attr == "rainbow" or attr == "red" or attr == "orange" or attr == "yellow" or
+              attr == "green" or attr == "blue" or attr == "indigo" or attr == "violet" do
     # "Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red"]
 
     Logger.debug("do_action_set_led #{attr}")
