@@ -34,5 +34,5 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
-    #- name: Check lints
-     # run: make lint
+    - name: Check lints
+      run: make lint
