@@ -1,5 +1,5 @@
 defmodule TwinklyhahaWeb.ErrorViewTest do
-  use TwinklyhahaWeb.ConnCase, async: true
+  use TwinklyhahaWeb.ConnCase
 
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View
