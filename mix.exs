@@ -5,7 +5,7 @@ defmodule Twinklyhaha.MixProject do
     [
       app: :twinklyhaha,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.10.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -33,6 +33,7 @@ defmodule Twinklyhaha.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.5.4"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
@@ -61,8 +62,7 @@ defmodule Twinklyhaha.MixProject do
     [
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      "ecto.reset": ["ecto.drop", "ecto.setup"]
     ]
   end
 end

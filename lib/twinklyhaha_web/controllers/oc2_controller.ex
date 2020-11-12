@@ -5,8 +5,6 @@ defmodule TwinklyhahaWeb.OC2Controller do
   @topic "leds"
   @on "on"
   @off "off"
-  @red "red"
-  @colors ["Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red"]
 
   def command(conn, params) do
     Logger.debug("oc2_controller command #{inspect(params)}")
@@ -194,14 +192,8 @@ defmodule TwinklyhahaWeb.OC2Controller do
   end
 
   defp do_action_set_led(conn, attr)
-       when attr == "rainbow" or
-              attr == "red" or
-              attr == "orange" or
-              attr == "yellow" or
-              attr == "green" or
-              attr == "blue" or
-              attr == "indigo" or
-              attr == "violet" do
+       when attr == "rainbow" or attr == "red" or attr == "orange" or attr == "yellow" or
+              attr == "green" or attr == "blue" or attr == "indigo" or attr == "violet" do
     # "Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red"]
 
     Logger.debug("do_action_set_led #{attr}")
@@ -287,7 +279,7 @@ defmodule TwinklyhahaWeb.OC2Controller do
     {:error, "sbom format error"}
   end
 
-  defp cyclonedx() do
+  defp cyclonedx do
     ## return sbom in cyclonedx format
     ## build result starting innermost at binary
     cyclonedx_bin =
@@ -386,13 +378,6 @@ defmodule TwinklyhahaWeb.OC2Controller do
   end
 
   defp set_matrix_rainbow(conn) do
-    Firmware.Worker.rainbow()
-    json(conn, %{status: :ok})
-  end
-
-  defp set_matrix_red(conn) do
-    Logger.debug("oc2_c:set_matrix_red")
-    Phoenix.PubSub.broadcast(Twinklyhaha.PubSub, @topic, @red)
     json(conn, %{status: :ok})
   end
 
