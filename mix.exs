@@ -5,7 +5,7 @@ defmodule Twinklyhaha.MixProject do
     [
       app: :twinklyhaha,
       version: "0.1.0",
-      elixir: "~> 1.10.4",
+      elixir: "~> 1.11.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -33,12 +33,12 @@ defmodule Twinklyhaha.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:phoenix, "~> 1.5.6"},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:phoenix, "~> 1.5.4"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_view, "~> 0.13.0"},
+      {:phoenix_live_view, "~> 0.14.8"},
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
