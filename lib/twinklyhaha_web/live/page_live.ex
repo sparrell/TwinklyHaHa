@@ -1,4 +1,5 @@
 defmodule TwinklyhahaWeb.PageLive do
+  @moduledoc false
   use TwinklyhahaWeb, :live_view
 
   @impl true
