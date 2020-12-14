@@ -103,8 +103,8 @@ deploy-existing-image: ## creates an instance using existing gcp docker image
 update-instance: ## updates image of a running instance
 	gcloud compute instances update-container $(instance-name) --container-image gcr.io/twinklymaha/haha:$(image-tag)
 
-.PHONY: generate-sbom
-generate-sbom: ## creates sbom from the npm and hex packages
+.PHONY: sbom
+sbom: ## creates sbom for both  npm and hex dependancies
 	mix deps.get && mix sbom.cyclonedx -o elixir_bom.xml
 	cd assets/  && npm install && npm install -g @cyclonedx/bom && cyclonedx-bom -o ../bom.xml -a ../elixir_bom.xml && cd ..
 	./cyclonedx-cli convert --input-file bom.xml --output-file bom.json
