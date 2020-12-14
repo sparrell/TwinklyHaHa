@@ -142,7 +142,7 @@ Note it is http not https
 To generate an sbom file, use the make task `make sbom` to generate a `bom.json` file on the project root.
 
 **Before you begin:**
- - Download (cyclonedx-cli tool)[https://github.com/CycloneDX/cyclonedx-cli] that supports converting
+ - Download [cyclonedx-cli tool](https://github.com/CycloneDX/cyclonedx-cli) that supports converting
  of sbom in different formats. 
  - Ensure that the `cyclonedx-cli tool` is executable, if not use the command to make it executable `chmod a+x cyclonedx-cli tool`
  - Add the `cyclonedx-cli tool` to the root of the project and rename it to `cyclonedx-cli` 
